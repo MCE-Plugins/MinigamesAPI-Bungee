@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,6 +24,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
@@ -33,7 +35,8 @@ import com.google.common.io.ByteStreams;
 public class Main extends JavaPlugin implements PluginMessageListener, Listener {
 
 	BungeeServer serv;
-
+	HashMap<String, String> Message = new HashMap<>();
+	
 	public void onEnable() {
 		this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 		this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
@@ -169,6 +172,7 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 		}
 	}
 
+	
 	@EventHandler
 	public void onSignUse(PlayerInteractEvent event) {
 		if (event.hasBlock()) {
@@ -321,10 +325,10 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 		arenastate = arenastate.toLowerCase();
 		if (s != null) {
 			s.getBlock().getChunk().load();
-			s.setLine(0, getConfig().getString("signs." + arenastate + ".0").replaceAll("&", "ง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
-			s.setLine(1, getConfig().getString("signs." + arenastate + ".1").replaceAll("&", "ง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
-			s.setLine(2, getConfig().getString("signs." + arenastate + ".2").replaceAll("&", "ง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
-			s.setLine(3, getConfig().getString("signs." + arenastate + ".3").replaceAll("&", "ง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
+			s.setLine(0, getConfig().getString("signs." + arenastate + ".0").replaceAll("&", "ยง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
+			s.setLine(1, getConfig().getString("signs." + arenastate + ".1").replaceAll("&", "ยง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
+			s.setLine(2, getConfig().getString("signs." + arenastate + ".2").replaceAll("&", "ยง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
+			s.setLine(3, getConfig().getString("signs." + arenastate + ".3").replaceAll("&", "ยง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
 			s.update();
 		}
 	}
@@ -333,11 +337,15 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 		int count = 0;
 		int maxcount = 10;
 		arenastate = arenastate.toLowerCase();
-		event.setLine(0, getConfig().getString("signs." + arenastate + ".0").replaceAll("&", "ง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
-		event.setLine(1, getConfig().getString("signs." + arenastate + ".1").replaceAll("&", "ง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
-		event.setLine(2, getConfig().getString("signs." + arenastate + ".2").replaceAll("&", "ง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
-		event.setLine(3, getConfig().getString("signs." + arenastate + ".3").replaceAll("&", "ง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
-	}
+		event.setLine(0, getConfig().getString("signs." + arenastate + ".0").replaceAll("&", "ยง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
+		event.setLine(1, getConfig().getString("signs." + arenastate + ".1").replaceAll("&", "ยง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
+		event.setLine(2, getConfig().getString("signs." + arenastate + ".2").replaceAll("&", "ยง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
+		event.setLine(3, getConfig().getString("signs." + arenastate + ".3").replaceAll("&", "ยง").replace("<count>", Integer.toString(count)).replace("<maxcount>", Integer.toString(maxcount)).replace("<arena>", arenaname).replace("<minigame>", mg).replace("[]", new String(squares_mid)).replace("[1]", new String(squares_full).replace("[2]", new String(squares_medium)).replace("[3]", new String(squares_light))));
+		if (getConfig().getBoolean("BungeeMotd") == true) {
+			MOTD_Sending();
+		}
+		}
+	
 
 	public void updateAllServerSigns() {
 		if (getConfig().isSet("arenas.")) {
@@ -349,6 +357,30 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 		}
 	}
 
+	
+	@EventHandler
+    public void onServerPing(ServerListPingEvent e) {
+            String motd = getConfig().getString("motd.system");
+            motd = motd.replaceAll("&", "\u00A7");
+            e.setMotd(motd);
+    }
+	
+	public void MOTD_Sending() {
+		String[] states = new String[] { "JOIN", "STARTING", "INGAME", "RESTARTING" };
+		for (String state : states) {	
+		if (state.contains("JOIN")) {
+			Message.put("Bungee", getConfig().getString("MotdJoin").replace("&", "ยง") + " ");
+		}else if (state.contains("INGAME")) {
+			Message.put("Bungee", getConfig().getString("MotdIngame").replace("&", "ยง") + " ");
+		}else if (state.contains("STARTING")) {
+			Message.put("Bungee", getConfig().getString("MotdStarting").replace("&", "ยง") + " ");
+		}else if (state.contains("RESTARTING")) {
+			Message.put("Bungee", getConfig().getString("MotdRestart").replace("&", "ยง") + " ");
+		}
+		}
+	}
+	
+	
 	public void requestServerSign(String mg_key, String arena_key) {
 		try {
 			ByteArrayDataOutput out = ByteStreams.newDataOutput();

@@ -1,7 +1,7 @@
 name: MinigamesLibBungee
 main: com.instancedev.minigamesapibungee.Main
-version: 2.0.0
-author: InstanceLabs
+version: 2.1.0
+author: [TheMrQuake,InstanceLabs,mepeisen]
 commands:
    mg:
       description: Main command

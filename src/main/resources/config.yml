@@ -1,0 +1,5 @@
+BungeeMotd: false
+MotdJoin: '&aJOIN'
+MotdIngame: '&cInGame'
+MotdStarting: '&eStarting'
+MotdRestart: '&6Restart'
