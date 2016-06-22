@@ -1,6 +1,6 @@
 name: MinigamesLibBungee
 main: com.instancedev.minigamesapibungee.Main
-version: ${version}
+version: ${minigames.releaseversion}-${minigames.timestamp}
 author: [TheMrQuake,InstanceLabs,mepeisen]
 commands:
    mg:
