@@ -155,14 +155,14 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 	@EventHandler
 	public void onBreak(BlockBreakEvent event) {
 		if (event.getBlock().getType() == Material.SIGN_POST || event.getBlock().getType() == Material.WALL_SIGN) {
-			if (getConfig().isSet("arenas.")) {
-				for (String mg_key : getConfig().getConfigurationSection("arenas.").getKeys(false)) {
-					for (String arena_key : getConfig().getConfigurationSection("arenas." + mg_key + ".").getKeys(false)) {
-						Location l = new Location(Bukkit.getWorld(getConfig().getString("arenas." + mg_key + "." + arena_key + ".world")), getConfig().getInt("arenas." + mg_key + "." + arena_key + ".loc.x"), getConfig().getInt("arenas." + mg_key + "." + arena_key + ".loc.y"), getConfig().getInt("arenas." + mg_key + "." + arena_key + ".loc.z"));
+			if (getConfig().isSet(ArenaConfigStrings.ARENAS_PREFIX)) {
+				for (String mg_key : getConfig().getConfigurationSection(ArenaConfigStrings.ARENAS_PREFIX).getKeys(false)) {
+					for (String arena_key : getConfig().getConfigurationSection(ArenaConfigStrings.ARENAS_PREFIX + mg_key + ".").getKeys(false)) {
+						Location l = new Location(Bukkit.getWorld(getConfig().getString(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".world")), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".loc.x"), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".loc.y"), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".loc.z"));
 						System.out.println(l);
 						if (l.distance(event.getBlock().getLocation()) < 1) {
-							// getConfig().set("arenas." + mg_key + "." + arena_key + ".server", null);
-							getConfig().set("arenas." + mg_key + "." + arena_key, null);
+							// getConfig().set(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".server", null);
+							getConfig().set(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key, null);
 							saveConfig();
 							return;
 						}
@@ -223,11 +223,11 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 					String arena = event.getLine(2);
 					String server = event.getLine(3);
 
-					getConfig().set("arenas." + mg + "." + arena + ".server", server);
-					getConfig().set("arenas." + mg + "." + arena + ".world", p.getWorld().getName());
-					getConfig().set("arenas." + mg + "." + arena + ".loc.x", event.getBlock().getLocation().getBlockX());
-					getConfig().set("arenas." + mg + "." + arena + ".loc.y", event.getBlock().getLocation().getBlockY());
-					getConfig().set("arenas." + mg + "." + arena + ".loc.z", event.getBlock().getLocation().getBlockZ());
+					getConfig().set(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".server", server);
+					getConfig().set(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".world", p.getWorld().getName());
+					getConfig().set(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".loc.x", event.getBlock().getLocation().getBlockX());
+					getConfig().set(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".loc.y", event.getBlock().getLocation().getBlockY());
+					getConfig().set(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".loc.z", event.getBlock().getLocation().getBlockZ());
 					saveConfig();
 
 					p.sendMessage(ChatColor.GREEN + "Successfully set sign.");
@@ -242,12 +242,12 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 	}
 
 	public String getServerBySignLocation(Location sign) {
-		if (getConfig().isSet("arenas.")) {
-			for (String mg_key : getConfig().getConfigurationSection("arenas.").getKeys(false)) {
-				for (String arena_key : getConfig().getConfigurationSection("arenas." + mg_key + ".").getKeys(false)) {
-					Location l = new Location(Bukkit.getWorld(getConfig().getString("arenas." + mg_key + "." + arena_key + ".world")), getConfig().getInt("arenas." + mg_key + "." + arena_key + ".loc.x"), getConfig().getInt("arenas." + mg_key + "." + arena_key + ".loc.y"), getConfig().getInt("arenas." + mg_key + "." + arena_key + ".loc.z"));
+		if (getConfig().isSet(ArenaConfigStrings.ARENAS_PREFIX)) {
+			for (String mg_key : getConfig().getConfigurationSection(ArenaConfigStrings.ARENAS_PREFIX).getKeys(false)) {
+				for (String arena_key : getConfig().getConfigurationSection(ArenaConfigStrings.ARENAS_PREFIX + mg_key + ".").getKeys(false)) {
+					Location l = new Location(Bukkit.getWorld(getConfig().getString(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".world")), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".loc.x"), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".loc.y"), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".loc.z"));
 					if (l.distance(sign) < 1) {
-						return getConfig().getString("arenas." + mg_key + "." + arena_key + ".server");
+						return getConfig().getString(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".server");
 					}
 				}
 			}
@@ -256,10 +256,10 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 	}
 
 	public String getInfoBySignLocation(Location sign) {
-		if (getConfig().isSet("arenas.")) {
-			for (String mg_key : getConfig().getConfigurationSection("arenas.").getKeys(false)) {
-				for (String arena_key : getConfig().getConfigurationSection("arenas." + mg_key + ".").getKeys(false)) {
-					Location l = new Location(Bukkit.getWorld(getConfig().getString("arenas." + mg_key + "." + arena_key + ".world")), getConfig().getInt("arenas." + mg_key + "." + arena_key + ".loc.x"), getConfig().getInt("arenas." + mg_key + "." + arena_key + ".loc.y"), getConfig().getInt("arenas." + mg_key + "." + arena_key + ".loc.z"));
+		if (getConfig().isSet(ArenaConfigStrings.ARENAS_PREFIX)) {
+			for (String mg_key : getConfig().getConfigurationSection(ArenaConfigStrings.ARENAS_PREFIX).getKeys(false)) {
+				for (String arena_key : getConfig().getConfigurationSection(ArenaConfigStrings.ARENAS_PREFIX + mg_key + ".").getKeys(false)) {
+					Location l = new Location(Bukkit.getWorld(getConfig().getString(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".world")), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".loc.x"), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".loc.y"), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg_key + "." + arena_key + ".loc.z"));
 					if (l.distance(sign) < 1) {
 						return mg_key + ":" + arena_key;
 					}
@@ -301,10 +301,10 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 	}
 
 	public Sign getSignFromArena(String mg, String arena) {
-		if (!getConfig().isSet("arenas." + mg + "." + arena + ".world")) {
+		if (!getConfig().isSet(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".world")) {
 			return null;
 		}
-		Location b_ = new Location(Bukkit.getServer().getWorld(getConfig().getString("arenas." + mg + "." + arena + ".world")), getConfig().getInt("arenas." + mg + "." + arena + ".loc.x"), getConfig().getInt("arenas." + mg + "." + arena + ".loc.y"), getConfig().getInt("arenas." + mg + "." + arena + ".loc.z"));
+		Location b_ = new Location(Bukkit.getServer().getWorld(getConfig().getString(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".world")), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".loc.x"), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".loc.y"), getConfig().getInt(ArenaConfigStrings.ARENAS_PREFIX + mg + "." + arena + ".loc.z"));
 		if (b_ != null) {
 			if (b_.getWorld() != null) {
 				if (b_.getBlock().getState() != null) {
@@ -348,9 +348,9 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 	
 
 	public void updateAllServerSigns() {
-		if (getConfig().isSet("arenas.")) {
-			for (String mg_key : getConfig().getConfigurationSection("arenas.").getKeys(false)) {
-				for (String arena_key : getConfig().getConfigurationSection("arenas." + mg_key + ".").getKeys(false)) {
+		if (getConfig().isSet(ArenaConfigStrings.ARENAS_PREFIX)) {
+			for (String mg_key : getConfig().getConfigurationSection(ArenaConfigStrings.ARENAS_PREFIX).getKeys(false)) {
+				for (String arena_key : getConfig().getConfigurationSection(ArenaConfigStrings.ARENAS_PREFIX + mg_key + ".").getKeys(false)) {
 					this.requestServerSign(mg_key, arena_key);
 				}
 			}
@@ -361,7 +361,7 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 	@EventHandler
     public void onServerPing(ServerListPingEvent e) {
             String motd = getConfig().getString("motd.system");
-            motd = motd.replaceAll("&", "\u00A7");
+            if (motd != null) motd = motd.replaceAll("&", "\u00A7");
             e.setMotd(motd);
     }
 	
