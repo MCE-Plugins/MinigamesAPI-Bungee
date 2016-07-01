@@ -361,7 +361,7 @@ public class Main extends JavaPlugin implements PluginMessageListener, Listener 
 	@EventHandler
     public void onServerPing(ServerListPingEvent e) {
             String motd = getConfig().getString("motd.system");
-            motd = motd.replaceAll("&", "\u00A7");
+            if (motd != null) motd = motd.replaceAll("&", "\u00A7");
             e.setMotd(motd);
     }
 	
